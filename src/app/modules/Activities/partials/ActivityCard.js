@@ -14,6 +14,8 @@ const activityCard = (props) => {
         progressBarclassNamees.push('kt-bg-warning');
     }
 
+    const tags = ['success', 'primary'];
+
     return (
         <div className="card card-custom gutter-b">
             <div className="card-body">
@@ -39,11 +41,12 @@ const activityCard = (props) => {
                                 {/* <!--begin::Name--> */}
                                 <a href="/#" className="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{props.activityName}
                                 </a>
-                                {/* <!--end::Name--> */}
+                                {/* <!--end::Name--> *
                                 {/* <!--begin::Contacts--> */}
                                 <div className="">
-                                    <span className="label label-lg label-light-success label-inline mr-2">Indoor</span>
-                                    <span className="label label-lg label-light-primary label-inline mr-2">Arts</span>
+                                    {props.categories.split(',').map((cat, index) => {
+                                        return (<span key={cat} className={`label label-lg label-light-${tags[index]} label-inline mr-2"`}>{cat}</span>)
+                                    })}
                                 </div>
                                 <div className="d-flex flex-wrap my-2">
                                     <a href="#t" className="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
@@ -57,7 +60,7 @@ const activityCard = (props) => {
                                             {/* <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Mail-notification.svg--> */}
                                             <SVG src={toAbsoluteUrl("/media/svg/icons/General/Notification2.svg")} />
                                             {/* <!--end::Svg Icon--> */}
-                                        </span>Wednesday , 9:00 AM - 10:00 AM</a>
+                                </span>{props.days} ,{props.startTime} - {props.endTime}</a>
                                 </div>
                                 {/* <!--end::Contacts--> */}
                             </div>

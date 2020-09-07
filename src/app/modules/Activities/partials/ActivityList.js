@@ -3,6 +3,7 @@ import React from 'react';
 import ActivityCard from '../partials/ActivityCard';
 
 const activityList = (props) => {
+    console.log(props.entities);
     return (
         <>
             {props.entities.map(activity => (
@@ -14,6 +15,10 @@ const activityList = (props) => {
                             address={activity.activity_location}
                             price={activity.activity_price}
                             desc={activity.activity_desc}
+                            categories={activity.categories}
+                            days={activity.days}
+                            startTime={activity.activity_start_time}
+                            endTime={activity.activity_end_time}
                         />
                     </div >
                 </div >
