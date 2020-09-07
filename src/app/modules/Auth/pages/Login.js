@@ -4,8 +4,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
+
+
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
+import {toAbsoluteUrl} from "../../../../_metronic/_helpers";
 
 /*
   INTL (i18n) docs:
@@ -92,14 +95,21 @@ function Login(props) {
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
-      {/* <div className="text-center mb-10 mb-lg-20">
-        <h3 className="font-size-h1">
+      <div className="text-center mb-10 mb-lg-20">
+        {/* <h3 className="font-size-h1">
           <FormattedMessage id="AUTH.LOGIN.TITLE" />
         </h3>
         <p className="text-muted font-weight-bold">
           Enter your username and password
-        </p>
-      </div> */}
+        </p> */}
+         <Link to="/" className="flex-column-auto mt-5">
+                  <img
+                      alt="Logo"
+                      className="max-h-70px"
+                      src={toAbsoluteUrl("/media/logos/benajme.png")}
+                  />
+                </Link>
+      </div>
       {/* end::Head */}
 
       {/*begin::Form*/}
