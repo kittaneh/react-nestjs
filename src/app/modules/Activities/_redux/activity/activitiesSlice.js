@@ -5,7 +5,8 @@ const initialActivitiesState = {
     actionsLoading: false,
     totalCount: 0,
     entities: null,
-    lastError: null
+    error: null,
+    activityCreated:null
 };
 export const callTypes = {
     list: "list",
@@ -18,6 +19,7 @@ export const activitiesSlice = createSlice({
     reducers: {
         catchError: (state, action) => {
             state.error = `${action.type}: ${action.payload.error}`;
+            state.activityCreated = null;
             if (action.payload.callType === callTypes.list) {
                 state.listLoading = false;
             } else {
@@ -26,6 +28,7 @@ export const activitiesSlice = createSlice({
         },
         startCall: (state, action) => {
             state.error = null;
+            state.activityCreated = null;
             if (action.payload.callType === callTypes.list) {
                 state.listLoading = true;
             } else {
@@ -44,7 +47,8 @@ export const activitiesSlice = createSlice({
         activityCreated: (state, action) => {
             state.actionsLoading = false;
             state.error = null;
-            state.entities.push(action.payload.customer);
+            state.activityCreated = true;
+            //state.entities.push(action.payload.customer);
         },
     }
 });

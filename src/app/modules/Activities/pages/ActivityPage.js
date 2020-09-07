@@ -54,20 +54,30 @@ export const ActivityPage = (props) => {
     const [endDate, setEndDate] = useState(Moment().add(10, 'days').toDate());
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(Moment().add(45, 'minutes').toDate());
-    const [loading, setLoading] = useState(false);
 
     const { currentState } = useSelector(
         (state) => ({ currentState: state.types }),
         shallowEqual
     );
-
     const { entities } = currentState;
     const types = entities === null ? [] : entities;
+
+    const { actionsLoading , activityCreated } = useSelector(
+        (state) => ({ actionsLoading: state.activities.actionsLoading , activityCreated: state.activities.activityCreated }),
+        shallowEqual
+    );
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(typeActions.fetchTypes());
     }, [dispatch]);
+
+    useEffect(() => {
+        if(activityCreated){
+            notify();
+        }
+    });
+
 
     const saveActivity = (activity) => {
         dispatch(activitiesActions.createActivity(activity));
@@ -82,16 +92,18 @@ export const ActivityPage = (props) => {
     };
 
     const notify = () => {
-        toast.success("Activity saved", {
-            onClose: () => { props.history.replace('/activities'); },
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
+        if (activityCreated) {
+            toast.success("Activity saved", {
+                onClose: () => { props.history.replace('/activities'); },
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
     }
 
     const preview = (event) => {
@@ -116,7 +128,6 @@ export const ActivityPage = (props) => {
                 onSubmit={(values) => {
                     const imgData = coverPhoto.replace('data:', '').split(";")[1];
                     const imgMimeType = coverPhoto.replace('data:', '').split(";")[0];
-                    setLoading(true);
                     setTimeout(() => {
                         const activity = {
                             ...values,
@@ -133,8 +144,6 @@ export const ActivityPage = (props) => {
                         }
                         saveActivity(activity);
                         //console.log(activity);
-                        setLoading(false);
-                        //notify();
                     }, 1000);
                 }}
             >
@@ -160,7 +169,7 @@ export const ActivityPage = (props) => {
                                 title="Add/Edit Activity"
                                 saveBtn="Save"
                                 saveBtnClickHandler={handleSubmit}
-                                loading={loading}
+                                loading={actionsLoading}
                                 cancelBtn="Cancel"
                                 cancelBtnClickHandler={cancelClickHandler}
                             />

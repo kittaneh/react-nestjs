@@ -26,18 +26,22 @@ export const createActivity = activityForCreation => dispatch => {
             return requestFromServer.uploadCoverPhoto({ coverphoto })
                 .then( response => {
                     const {activityImage } = response.data;
-                    return dispatch(requestFromServer.createActivityImage({activityImage}))
+                    return (requestFromServer.createActivityImage({activityImage})
                     .then( response => {
-                        dispatch(actions.activityCreated({ activityImage }));
+                        dispatch(actions.activityCreated({ }));
                     }).catch(error =>{
                         console.log(error);
-                    });                
+                        error.clientMessage = "Can't create activity";
+                        dispatch(actions.catchError({ error, callType: callTypes.action }));
+                    }));                
                 }).catch(err => {
                     console.log(err);
+                    err.clientMessage = "Can't create activity";
+                    dispatch(actions.catchError({ err, callType: callTypes.action }));
                 });
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             error.clientMessage = "Can't create activity";
             dispatch(actions.catchError({ error, callType: callTypes.action }));
         });
