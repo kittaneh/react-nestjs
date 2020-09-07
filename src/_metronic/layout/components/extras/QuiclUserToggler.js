@@ -28,10 +28,10 @@ export function QuickUserToggler() {
 
                 <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                 <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                  {user.email}
+                  {user.full_name}
                 </span>
                 <span className="symbol symbol-35 symbol-light-success">                
-                    <span className="symbol-label font-size-h5 font-weight-bold">{user.email[0]}</span>
+                    <span className="symbol-label font-size-h5 font-weight-bold">{user.full_name[0]}</span>
                 </span>
               </>
             </div>

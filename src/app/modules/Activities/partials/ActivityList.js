@@ -3,7 +3,6 @@ import React from 'react';
 import ActivityCard from '../partials/ActivityCard';
 
 const activityList = (props) => {
-    console.log(props.entities);
     return (
         <>
             {props.entities.map(activity => (

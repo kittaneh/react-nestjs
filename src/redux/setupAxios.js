@@ -2,14 +2,15 @@ export default function setupAxios(axios, store) {
   axios.interceptors.request.use(
     config => {
       const {
-        auth: { authToken }
+        auth: { userId }
       } = store.getState();
 
       // if (authToken) {
       //   config.headers.Authorization = `Bearer ${authToken}`;
       // }
-      if (authToken && config.url.includes('accounts:lookup')) {
-        config.data = { idToken: authToken }
+      if (userId && config.url.includes('buser')) {
+        // config.data = userId 
+        config.url = `${config.url}/${userId}`; 
       }
 
       return config;

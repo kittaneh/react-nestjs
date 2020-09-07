@@ -72,9 +72,9 @@ function Login(props) {
       enableLoading();
       setTimeout(() => {
         login(values.email, values.password)
-          .then(({ data: { idToken } }) => {
+          .then(({ data: { idToken ,localId } }) => {
             disableLoading();
-            props.login(idToken);
+            props.login({idToken,localId});
           })
           .catch(() => {
             disableLoading();
@@ -92,14 +92,14 @@ function Login(props) {
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
-      <div className="text-center mb-10 mb-lg-20">
+      {/* <div className="text-center mb-10 mb-lg-20">
         <h3 className="font-size-h1">
           <FormattedMessage id="AUTH.LOGIN.TITLE" />
         </h3>
         <p className="text-muted font-weight-bold">
           Enter your username and password
         </p>
-      </div>
+      </div> */}
       {/* end::Head */}
 
       {/*begin::Form*/}
@@ -108,14 +108,14 @@ function Login(props) {
         className="form fv-plugins-bootstrap fv-plugins-framework"
       >
         {formik.status ? (
-          <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
+          <div className="mb-10 alert alert-custom alert-light-primary alert-dismissible">
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
         ) : (
           <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
             <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
+              Use account <strong>test@benajme.com</strong> and password{" "}
+              <strong>test</strong> to continue.
             </div>
           </div>
         )}
