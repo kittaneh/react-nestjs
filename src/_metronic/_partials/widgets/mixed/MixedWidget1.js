@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React, {useMemo, useEffect} from "react";
+import React, { useMemo, useEffect } from "react";
 import SVG from "react-inlinesvg";
 import objectPath from "object-path";
 import ApexCharts from "apexcharts";
-import {Dropdown} from "react-bootstrap";
-import {toAbsoluteUrl} from "../../../_helpers";
-import {useHtmlClassService} from "../../../layout";
-import {DropdownMenu2} from "../../dropdowns";
+import { Dropdown } from "react-bootstrap";
+import { toAbsoluteUrl } from "../../../_helpers";
+import { useHtmlClassService } from "../../../layout";
+import { DropdownMenu2 } from "../../dropdowns";
 
 export function MixedWidget1({ className }) {
   const uiService = useHtmlClassService();
@@ -52,10 +52,10 @@ export function MixedWidget1({ className }) {
   return (
     <div className={`card card-custom bg-gray-100 ${className}`}>
       {/* Header */}
-      <div className="card-header border-0 bg-danger py-5">
-        <h3 className="card-title font-weight-bolder text-white">Sales Stat</h3>
+      <div className="card-header border-0 bg-primary py-5">
+        <h3 className="card-title font-weight-bolder text-white">Statistics</h3>
         <div className="card-toolbar">
-          <Dropdown className="dropdown-inline" drop="down" alignRight>
+          {/* <Dropdown className="dropdown-inline" drop="down" alignRight>
             <Dropdown.Toggle
               className="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5"
               variant="transparent"
@@ -65,7 +65,7 @@ export function MixedWidget1({ className }) {
             <Dropdown.Menu className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
               <DropdownMenu2 />
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> */}
         </div>
       </div>
       {/* Body */}
@@ -73,7 +73,7 @@ export function MixedWidget1({ className }) {
         {/* Chart */}
         <div
           id="kt_mixed_widget_1_chart"
-          className="card-rounded-bottom bg-danger"
+          className="card-rounded-bottom bg-primary"
           style={{ height: "200px" }}
         ></div>
 
@@ -90,8 +90,12 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-warning font-weight-bold font-size-h6"
               >
-                Weekly Sales
+                Published
               </a>
+              <br />
+              <span className="text-muted font-weight-bold mt-2">
+                15 new activities
+            </span>
             </div>
             <div className="col bg-light-primary px-6 py-8 rounded-xl mb-7">
               <span className="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
@@ -105,8 +109,12 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-primary font-weight-bold font-size-h6 mt-2"
               >
-                New Users
+                Booked
               </a>
+              <br />
+              <span className="text-muted font-weight-bold mt-2">
+                72 new kids
+            </span>
             </div>
           </div>
           <div className="row m-0">
@@ -120,8 +128,12 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-danger font-weight-bold font-size-h6 mt-2"
               >
-                Item Orders
+                Reviewed
               </a>
+              <br />
+              <span className="text-muted font-weight-bold mt-2">
+                2 activities
+            </span>
             </div>
             <div className="col bg-light-success px-6 py-8 rounded-xl">
               <span className="svg-icon svg-icon-3x svg-icon-success d-block my-2">
@@ -135,8 +147,12 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-success font-weight-bold font-size-h6 mt-2"
               >
-                Bug Reports
+                Requested
               </a>
+              <br />
+              <span className="text-muted font-weight-bold mt-2">
+                44 activities
+            </span>
             </div>
           </div>
         </div>
@@ -154,7 +170,7 @@ export function MixedWidget1({ className }) {
 }
 
 function getChartOptions(layoutProps) {
-  const strokeColor = "#D13647";
+  const strokeColor = "#0E598C";
 
   const options = {
     series: [
@@ -267,7 +283,7 @@ function getChartOptions(layoutProps) {
         fontFamily: layoutProps.fontFamily
       },
       y: {
-        formatter: function(val) {
+        formatter: function (val) {
           return "$" + val + " thousands";
         }
       },

@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Link} from "react-router-dom";
+//import {Link} from "react-router-dom";
 import objectPath from "object-path";
 import SVG from "react-inlinesvg";
 import {useHtmlClassService} from "../../_core/MetronicLayout";
@@ -28,9 +28,9 @@ export function Brand() {
           id="kt_brand"
       >
         {/* begin::Logo */}
-        <Link to="" className="brand-logo">
+        {/* <Link to="" className="brand-logo">
           <img alt="logo" src={layoutProps.headerLogo}/>
-        </Link>
+        </Link> */}
         {/* end::Logo */}
 
         {layoutProps.asideSelfMinimizeToggle && (

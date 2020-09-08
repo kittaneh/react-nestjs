@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import { Alert } from 'react-bootstrap';
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
@@ -8,7 +9,7 @@ import { FormattedMessage, injectIntl } from "react-intl";
 
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
-import {toAbsoluteUrl} from "../../../../_metronic/_helpers";
+import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 
 /*
   INTL (i18n) docs:
@@ -75,9 +76,9 @@ function Login(props) {
       enableLoading();
       setTimeout(() => {
         login(values.email, values.password)
-          .then(({ data: { idToken ,localId } }) => {
+          .then(({ data: { idToken, localId } }) => {
             disableLoading();
-            props.login({idToken,localId});
+            props.login({ idToken, localId });
           })
           .catch(() => {
             disableLoading();
@@ -102,13 +103,13 @@ function Login(props) {
         <p className="text-muted font-weight-bold">
           Enter your username and password
         </p> */}
-         <Link to="/" className="flex-column-auto mt-5">
-                  <img
-                      alt="Logo"
-                      className="max-h-70px"
-                      src={toAbsoluteUrl("/media/logos/benajme.png")}
-                  />
-                </Link>
+        <Link to="/" className="flex-column-auto mt-5">
+          <img
+            alt="Logo"
+            className="max-h-70px"
+            src={toAbsoluteUrl("/media/logos/benajme.png")}
+          />
+        </Link>
       </div>
       {/* end::Head */}
 
@@ -122,13 +123,19 @@ function Login(props) {
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
         ) : (
-          <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div className="alert-text ">
-              Use account <strong>test@benajme.com</strong> and password{" "}
-              <strong>test</strong> to continue.
-            </div>
-          </div>
-        )}
+            // <div className="mb-10 alert alert-custom alert-light-info alert-dismissible" atyle={{backgroundColor:'green !important'}}>
+            //   <div className="alert-text ">
+            //     Use account <strong>test@benajme.com</strong> and password{" "}
+            //     <strong>test</strong> to continue.
+            //   </div>
+            // </div>
+            <Alert variant="primary">
+              <div className="alert-text ">
+                Use account <strong>test@benajme.com</strong> and password{" "}
+                <strong>test</strong> to continue.
+             </div>
+            </Alert>
+          )}
 
         <div className="form-group fv-plugins-icon-container">
           <input

@@ -56,15 +56,15 @@ export function StatsWidget11({ className }) {
               href="#"
               className="text-dark-75 text-hover-primary font-weight-bolder font-size-h5"
             >
-              Weekly Sales
+              Promoted Activities Traffic
             </a>
-            <span className="text-muted font-weight-bold mt-2">
+            {/* <span className="text-muted font-weight-bold mt-2">
               Your Weekly Sales Chart
-            </span>
+            </span> */}
           </div>
           <span className="symbol symbol-light-success symbol-45">
             <span className="symbol-label font-weight-bolder font-size-h6">
-              +57
+              +570
             </span>
           </span>
         </div>

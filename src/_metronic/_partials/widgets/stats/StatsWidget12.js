@@ -2,9 +2,9 @@
 import React, {useMemo, useEffect} from "react";
 import objectPath from "object-path";
 import ApexCharts from "apexcharts";
-import SVG from "react-inlinesvg";
+//import SVG from "react-inlinesvg";
 import {useHtmlClassService} from "../../../layout";
-import {toAbsoluteUrl} from "../../../_helpers";
+//import {toAbsoluteUrl} from "../../../_helpers";
 
 export function StatsWidget12({ className }) {
   const uiService = useHtmlClassService();
@@ -53,22 +53,24 @@ export function StatsWidget12({ className }) {
     <div className={`card card-custom ${className}`}>
       <div className="card-body d-flex flex-column p-0">
         <div className="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
-          <span className="symbol symbol-circle symbol-50 symbol-light-primary mr-2">
-            <span className="symbol-label">
-              <span className="svg-icon svg-icon-xl svg-icon-primary">
-                <SVG
-                  src={toAbsoluteUrl(
-                    "/media/svg/icons/Communication/Group.svg"
-                  )}
-                ></SVG>
-              </span>
+        <div className="d-flex flex-column mr-2">
+            <a
+              href="#"
+              className="text-dark-75 text-hover-primary font-weight-bolder font-size-h5"
+            >
+              Normal Activities Traffic
+            </a>
+            {/* <span className="text-muted font-weight-bold mt-2">
+              Your Weekly Sales Chart
+            </span> */}
+          </div>
+          <div className="d-flex flex-column text-right">
+          <span className="symbol symbol-light-primary symbol-45">
+            <span className="symbol-label font-weight-bolder font-size-h6">
+              22
             </span>
           </span>
-          <div className="d-flex flex-column text-right">
-            <span className="text-dark-75 font-weight-bolder font-size-h3">
-              +6,5K
-            </span>
-            <span className="text-muted font-weight-bold mt-2">New Users</span>
+            {/* <span className="text-muted font-weight-bold mt-2">New Users</span> */}
           </div>
         </div>
         <div
