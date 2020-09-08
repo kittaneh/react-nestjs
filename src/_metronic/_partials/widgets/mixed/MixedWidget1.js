@@ -4,10 +4,10 @@ import React, { useMemo, useEffect } from "react";
 import SVG from "react-inlinesvg";
 import objectPath from "object-path";
 import ApexCharts from "apexcharts";
-import { Dropdown } from "react-bootstrap";
+//import { Dropdown } from "react-bootstrap";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../../layout";
-import { DropdownMenu2 } from "../../dropdowns";
+//import { DropdownMenu2 } from "../../dropdowns";
 
 export function MixedWidget1({ className }) {
   const uiService = useHtmlClassService();
