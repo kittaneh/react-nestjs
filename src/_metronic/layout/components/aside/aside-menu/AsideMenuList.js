@@ -48,10 +48,10 @@ export function AsideMenuList({ layoutProps }) {
         {/*Calendar*/}
         {/*begin::1 Level*/}
         <li
-          className={`menu-item ${getMenuItemActive("/builder", false)}`}
+          className={`menu-item ${getMenuItemActive("/calendar", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/builder">
+          <NavLink className="menu-link" to="/calendar">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Map/Compass.svg")} />
             </span>

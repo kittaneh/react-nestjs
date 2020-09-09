@@ -5,6 +5,7 @@ import {LayoutSplashScreen, ContentRoute} from "../_metronic/layout";
 import {BuilderPage} from "./pages/BuilderPage";
 import {Activities} from "./modules/Activities/pages/ActivitiesListPage";
 import {ActivityPage} from "./modules/Activities/pages/ActivityPage";
+import {Calendar} from "./modules/Calendar/pages/CalendarPage";
 import {DashboardPage} from "./pages/DashboardPage";
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,6 +38,7 @@ export default function BasePage() {
                 <ContentRoute path="/builder" component={BuilderPage}/>
                 <ContentRoute path="/activities/activity"  component={ActivityPage}/>
                 <ContentRoute path="/activities" exact component={Activities}/>
+                <ContentRoute path="/calendar" exact component={Calendar}/>
                 <Route path="/google-material" component={GoogleMaterialPage}/>
                 <Route path="/react-bootstrap" component={ReactBootstrapPage}/>
                 <Route path="/e-commerce" component={ECommercePage}/>
