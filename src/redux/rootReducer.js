@@ -8,6 +8,7 @@ import {remarksSlice} from "../app/modules/ECommerce/_redux/remarks/remarksSlice
 import {specificationsSlice} from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
 import { activitiesSlice } from "../app/modules/Activities/_redux/activity/activitiesSlice";
 import { typesSlice } from "../app/modules/Activities/_redux/type/typesSlice";
+import { bookingSlice } from '../app/modules/Booking/_redux/bookingSlice';
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   remarks: remarksSlice.reducer,
   specifications: specificationsSlice.reducer,
   activities:activitiesSlice.reducer,
-  types:typesSlice.reducer
+  types:typesSlice.reducer,
+  booking:bookingSlice.reducer
 });
 
 export function* rootSaga() {

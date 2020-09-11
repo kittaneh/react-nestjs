@@ -99,6 +99,8 @@ export function PleaseWaitMessage({ entities }) {
 }
 
 export function NoRecordsFoundMessage({ entities }) {
+  console.log('entities');
+  console.log(entities);
   const customersList = entities === null ? [] : entities;
   return (
     <>

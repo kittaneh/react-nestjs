@@ -219,3 +219,6 @@
 .w-94 {
   width: 94%
 }
+
+.kt-svg-icon g [fill] {
+  fill: #5d78ff; }

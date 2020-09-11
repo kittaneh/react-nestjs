@@ -5,6 +5,7 @@ import {LayoutSplashScreen, ContentRoute} from "../_metronic/layout";
 import {BuilderPage} from "./pages/BuilderPage";
 import {Activities} from "./modules/Activities/pages/ActivitiesListPage";
 import {ActivityPage} from "./modules/Activities/pages/ActivityPage";
+import {ActivityDetailsPage} from "./modules/Activities/pages/ActivityDetailsPage";
 import {Calendar} from "./modules/Calendar/pages/CalendarPage";
 import {DashboardPage} from "./pages/DashboardPage";
 
@@ -36,6 +37,7 @@ export default function BasePage() {
                 }
                 <ContentRoute path="/dashboard" component={DashboardPage}/>
                 <ContentRoute path="/builder" component={BuilderPage}/>
+                <ContentRoute path="/activities/activity/:id"  component={ActivityDetailsPage}/>
                 <ContentRoute path="/activities/activity"  component={ActivityPage}/>
                 <ContentRoute path="/activities" exact component={Activities}/>
                 <ContentRoute path="/calendar" exact component={Calendar}/>

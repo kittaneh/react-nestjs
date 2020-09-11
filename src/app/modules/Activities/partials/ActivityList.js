@@ -9,6 +9,7 @@ const activityList = (props) => {
                 <div key={activity.id} className="row">
                     <div className="col-xl-12">
                         <ActivityCard
+                            activityId={activity.id}
                             activityName={activity.activity_name}
                             activityImage={activity.activity_image_url}
                             address={activity.activity_location}

@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { FormGroup, FormLabel, FormCheck, FormControl, Col, Row, InputGroup } from 'react-bootstrap';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+//import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import Moment from 'moment';
@@ -16,7 +16,7 @@ import '../css/ActivityPage.css';
 
 
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers/AssetsHelpers";
-import { Card, CardBody, CardHeader } from "../../../../_metronic/_partials/controls";
+import { Card, CardBody } from "../../../../_metronic/_partials/controls";
 import StaticSubHeader from '../../../../_metronic/layout/components/subheader/StaticSubHeader';
 import { ActivityCoverPhoto } from '../partials/ActivityCoverPhoto';
 import * as typeActions from '../_redux/type/typesActions';
@@ -109,13 +109,10 @@ export const ActivityPage = (props) => {
     const preview = (event) => {
         let reader = new FileReader();
         let file = event.target.files[0];
-        //const file = URL.createObjectURL(event.target.files[0]);
-        //setCoverPhoto(file);
         reader.onloadend = () => {
             setCoverPhoto(reader.result);
         };
         reader.readAsDataURL(file);
-        //console.log(file);
     }
 
     const cancelClickHandler = () => { props.history.replace('/activities'); }
@@ -143,7 +140,6 @@ export const ActivityPage = (props) => {
                             organiser: 1
                         }
                         saveActivity(activity);
-                        //console.log(activity);
                     }, 1000);
                 }}
             >
@@ -173,18 +169,8 @@ export const ActivityPage = (props) => {
                                 cancelBtn="Cancel"
                                 cancelBtnClickHandler={cancelClickHandler}
                             />
-                            <Tabs>
                                 <Card>
-                                    <CardHeader>
-                                        <TabList>
-                                            <Tab>Profile</Tab>
-                                            <Tab>Requested</Tab>
-                                        </TabList>
-                                    </CardHeader>
                                     <CardBody>
-
-
-                                        <TabPanel>
                                             <Form className="form form-label-right">
                                                 <div className="form-group row">
                                                     <ActivityCoverPhoto
@@ -449,14 +435,8 @@ export const ActivityPage = (props) => {
                                                     }
                                                 </Field>
                                             </Form>
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <h2>Any content 2</h2>
-                                        </TabPanel>
-
                                     </CardBody>
                                 </Card>
-                            </Tabs>
                         </>
                     );
                 }

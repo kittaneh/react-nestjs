@@ -1,5 +1,6 @@
 import React from 'react';
 import SVG from "react-inlinesvg";
+import { NavLink } from 'react-router-dom';
 
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers/AssetsHelpers";
 import classes from '../css/ActivityCard.module.css';
@@ -39,8 +40,10 @@ const activityCard = (props) => {
                         <div className="d-flex align-items-center justify-content-between flex-wrap">
                             <div className="mr-3">
                                 {/* <!--begin::Name--> */}
-                                <a href="/#" className="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{props.activityName}
-                                </a>
+                                <NavLink to={`/activities/activity/${props.activityId}`}>
+                                    <span className="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{props.activityName}
+                                </span>
+                                </NavLink>
                                 {/* <!--end::Name--> *
                                 {/* <!--begin::Contacts--> */}
                                 <div className="">
