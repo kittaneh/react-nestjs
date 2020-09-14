@@ -17,7 +17,6 @@ export const bookingSlice = createSlice({
     reducers: {
         catchError: (state, action) => {
             state.error = `${action.type}: ${action.payload.error}`;
-            state.activityCreated = null;
             if (action.payload.callType === callTypes.list) {
                 state.listLoading = false;
             } else {
@@ -26,7 +25,7 @@ export const bookingSlice = createSlice({
         },
         startCall: (state, action) => {
             state.error = null;
-            state.activityCreated = null;
+            state.entities = [];
             if (action.payload.callType === callTypes.list) {
                 state.listLoading = true;
             } else {
@@ -39,6 +38,10 @@ export const bookingSlice = createSlice({
             state.error = null;
             state.entities = entities;
             state.totalCount = totalCount;
+        },
+        bookingUpdated: (state, action) => {
+            state.error = null;
+            state.actionsLoading = false;
         },
     }
 });

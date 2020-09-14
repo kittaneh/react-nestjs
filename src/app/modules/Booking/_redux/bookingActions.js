@@ -17,3 +17,17 @@ export const fetchBookings = queryParams => dispatch => {
         });
 };
 
+export const updateBooking = (id, status) => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .updateBooking(id, status)
+        .then(() => {
+            dispatch(actions.bookingUpdated({}));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't update booking";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
+
+

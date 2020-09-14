@@ -12,13 +12,15 @@ import { BookingTable } from '../../Booking/partials/BookingTable'
 export const ActivityDetailsPage = (props) => {
 
     const [tab, setTab] = useState("requested");
+    const cancelClickHandler = () => { props.history.replace('/activities'); }
 
-    console.log(props);
 
     return (
         <>
             <StaticSubHeader
                 title="Activity Info"
+                cancelBtn="Back"
+                cancelBtnClickHandler={cancelClickHandler}
             />
             <Card>
                 <CardHeader>
@@ -74,7 +76,10 @@ export const ActivityDetailsPage = (props) => {
                         />
                     )}
                     {tab === "booked" && (
-                        <div>Hello booked</div>
+                         <BookingTable
+                         activityId={props.match.params.id}
+                         status={'BOOKED'}
+                     />
                     )}
                 </CardBody>
 
