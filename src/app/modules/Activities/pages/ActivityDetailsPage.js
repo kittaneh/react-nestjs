@@ -1,12 +1,11 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/role-supports-aria-props */
 
 import React, { useState } from 'react';
-//import SVG from "react-inlinesvg";
 
-//import { toAbsoluteUrl } from "../../../../_metronic/_helpers/AssetsHelpers";
 import { Card, CardHeader, CardBody } from "../../../../_metronic/_partials/controls";
 import StaticSubHeader from '../../../../_metronic/layout/components/subheader/StaticSubHeader';
-import { BookingTable } from '../../Booking/partials/BookingTable'
+import { BookingTable } from '../../Booking/partials/BookingTable';
+import { BookingUIProvider } from "../..//Booking/context/BookingUIContext";
 
 
 export const ActivityDetailsPage = (props) => {
@@ -70,20 +69,22 @@ export const ActivityDetailsPage = (props) => {
                         <div>Hello basic</div>
                     )}
                     {tab === "requested" && (
-                        <BookingTable
-                            activityId={props.match.params.id}
-                            status={'PENDING'}
-                        />
+                        <BookingUIProvider>
+                            < BookingTable
+                                activityId={props.match.params.id}
+                                status={'PENDING'}
+                            />
+                        </BookingUIProvider>
                     )}
                     {tab === "booked" && (
-                         <BookingTable
-                         activityId={props.match.params.id}
-                         status={'BOOKED'}
-                     />
+                        <BookingUIProvider>
+                            <BookingTable
+                                activityId={props.match.params.id}
+                                status={'BOOKED'}
+                            />
+                        </BookingUIProvider>
                     )}
                 </CardBody>
-
-
             </Card>
         </>
     );

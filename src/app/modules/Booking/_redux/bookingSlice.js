@@ -43,5 +43,16 @@ export const bookingSlice = createSlice({
             state.error = null;
             state.actionsLoading = false;
         },
+        bookingsStatusUpdated: (state, action) => {
+            state.actionsLoading = false;
+            state.error = null;
+            //const { ids, status } = action.payload;
+            // state.entities = state.entities.map(entity => {
+            //     if (ids.findIndex(id => id === entity.id) > -1) {
+            //         entity.status = status;
+            //     }
+            //     return entity;
+            // });
+        }
     }
 });

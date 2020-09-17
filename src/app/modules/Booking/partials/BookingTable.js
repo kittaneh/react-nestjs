@@ -1,13 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import BootstrapTable from "react-bootstrap-table-next";
 
+
 import Spinner from '../../../../_metronic/_partials/controls/Spinner/Spinner';
 import { UpdateBookingDialog } from './UpdateBookingDialog';
+import { UpdateGroupBookingDialog } from './UpdateGroupBookingDialog';
 import * as columnFormatters from "./column-formatters";
 import * as actions from "../_redux/bookingActions";
+import { getSelectRow } from "../../../../_metronic/_helpers";
+import { useBookingUIContext } from "../context//BookingUIContext";
+import { BookingTableGroupButttons } from './BookingTableGroupButttons';
+
 
 export const BookingTable = (props) => {
+
+    const bookingUIContext = useBookingUIContext();
+    const bookingUIProps = useMemo(() => {
+        return {
+            ids: bookingUIContext.ids,
+            setIds: bookingUIContext.setIds,
+            showUpdateGroupBookingDialog:bookingUIContext.showUpdateGroupBookingDialog,
+            setShowUpdateGroupBookingDialog:bookingUIContext.setShowUpdateGroupBookingDialog
+        };
+    }, [bookingUIContext]);
 
     const [showUpdateBookingDialog, setShowUpdateBookingDialog] = useState(false);
     const [selectedId, setSelectedId] = useState();
@@ -87,6 +103,17 @@ export const BookingTable = (props) => {
                 activityId={props.activityId}
                 id={selectedId}
             />
+            <UpdateGroupBookingDialog
+                showUpdateGroupBookingDialog={bookingUIProps.showUpdateGroupBookingDialog}
+                setShowUpdateGroupBookingDialog={bookingUIProps.setShowUpdateGroupBookingDialog}
+                activityId={props.activityId}
+                ids={bookingUIProps.ids}
+            />
+            {(bookingUIProps.ids.length > 0 && (
+                <>
+                    <BookingTableGroupButttons />
+                </>
+            ))}
             {entities === null ? <Spinner /> : <BootstrapTable
                 wrapperClasses="table-responsive"
                 classes="table table-head-custom table-vertical-center overflow-hidden"
@@ -97,19 +124,19 @@ export const BookingTable = (props) => {
                 data={entities === null ? [] : entities}
                 columns={columns}
                 noDataIndication={() => <div className="text-center">No data</div>}
-            //overlay={ overlayFactory({ spinner: true, styles: { overlay: (base) => ({...base, background: 'rgba(255, 0, 0, 0.5)'}) } }) }
-            // defaultSorted={uiHelpers.defaultSorted}
-            // onTableChange={getHandlerTableChange(
-            //   productsUIProps.setQueryParams
-            // )}
-            // selectRow={getSelectRow({
-            //   entities,
-            //   ids: productsUIProps.ids,
-            //   setIds: productsUIProps.setIds,
-            // })}
+                //overlay={ overlayFactory({ spinner: true, styles: { overlay: (base) => ({...base, background: 'rgba(255, 0, 0, 0.5)'}) } }) }
+                // defaultSorted={uiHelpers.defaultSorted}
+                // onTableChange={getHandlerTableChange(
+                //   productsUIProps.setQueryParams
+                // )}
+                selectRow={getSelectRow({
+                    entities,
+                    ids: bookingUIProps.ids,
+                    setIds: bookingUIProps.setIds,
+                })}
             // {...paginationTableProps}
             >
-                {/* <PleaseWaitMessage entities={entities} />*/}
+                {/* <PleaseWaitMessage enti ties={entities} />*/}
             </BootstrapTable>
             }
         </>

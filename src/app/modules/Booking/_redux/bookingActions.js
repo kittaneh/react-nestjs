@@ -30,4 +30,17 @@ export const updateBooking = (id, status) => dispatch => {
         });
 };
 
+export const updateBookings = (ids, status, activityId) => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .updateBookings(ids, status, activityId)
+        .then(() => {
+            dispatch(actions.bookingsUpdated({}));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't update all bookings";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
+
 
