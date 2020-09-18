@@ -6,6 +6,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import Spinner from '../../../../_metronic/_partials/controls/Spinner/Spinner';
 import { UpdateBookingDialog } from './UpdateBookingDialog';
 import { UpdateGroupBookingDialog } from './UpdateGroupBookingDialog';
+import { CancelBookingDialog } from './CancelBookingDialog';
+import { AttendanceGroupBookingDialog } from './AttendanceGroupBookingDialog';
 import * as columnFormatters from "./column-formatters";
 import * as actions from "../_redux/bookingActions";
 import { getSelectRow } from "../../../../_metronic/_helpers";
@@ -20,12 +22,16 @@ export const BookingTable = (props) => {
         return {
             ids: bookingUIContext.ids,
             setIds: bookingUIContext.setIds,
-            showUpdateGroupBookingDialog:bookingUIContext.showUpdateGroupBookingDialog,
-            setShowUpdateGroupBookingDialog:bookingUIContext.setShowUpdateGroupBookingDialog
+            showUpdateGroupBookingDialog: bookingUIContext.showUpdateGroupBookingDialog,
+            setShowUpdateGroupBookingDialog: bookingUIContext.setShowUpdateGroupBookingDialog,
+            showAttendanceGroupBookingDialog: bookingUIContext.showAttendanceGroupBookingDialog,
+            setShowAttendanceGroupBookingDialog: bookingUIContext.setShowAttendanceGroupBookingDialog
         };
     }, [bookingUIContext]);
 
     const [showUpdateBookingDialog, setShowUpdateBookingDialog] = useState(false);
+    const [showCancelBookingDialog, setShowCancelBookingDialog] = useState(false);
+
     const [selectedId, setSelectedId] = useState();
 
     const { currentState } = useSelector(
@@ -44,7 +50,15 @@ export const BookingTable = (props) => {
         setSelectedId(id);
         setShowUpdateBookingDialog(true)
     }
-    const openCancelDialog = () => { }
+    const openCancelDialog = (id) => {
+        setSelectedId(id);
+        setShowCancelBookingDialog(true)
+    }
+
+    const openAttendanceDialog = (id) => {
+        setSelectedId(id);
+        bookingUIProps.setShowAttendanceGroupBookingDialog(true);
+    }
 
     const columns = [
         {
@@ -78,7 +92,7 @@ export const BookingTable = (props) => {
             //sortCaret: sortCaret,
             formatter: columnFormatters.StatusColumnFormatter,
         },
-        props.status === 'PENDING' && {
+        {
             dataField: "action",
             text: "Actions",
             isDummyField: true,
@@ -86,6 +100,8 @@ export const BookingTable = (props) => {
             formatExtraData: {
                 openBookDialog: openBookDialog,
                 openCancelDialog: openCancelDialog,
+                openAttendanceDialog: openAttendanceDialog,
+                filteredStatus: props.status
             },
             classes: "text-right pr-0",
             headerClasses: "text-right pr-3",
@@ -103,15 +119,29 @@ export const BookingTable = (props) => {
                 activityId={props.activityId}
                 id={selectedId}
             />
+            <CancelBookingDialog
+                showCancelBookingDialog={showCancelBookingDialog}
+                setShowCancelBookingDialog={setShowCancelBookingDialog}
+                activityId={props.activityId}
+                id={selectedId}
+            />
             <UpdateGroupBookingDialog
                 showUpdateGroupBookingDialog={bookingUIProps.showUpdateGroupBookingDialog}
                 setShowUpdateGroupBookingDialog={bookingUIProps.setShowUpdateGroupBookingDialog}
                 activityId={props.activityId}
                 ids={bookingUIProps.ids}
             />
+            <AttendanceGroupBookingDialog
+                showAttendanceGroupBookingDialog={bookingUIProps.showAttendanceGroupBookingDialog}
+                setShowAttendanceGroupBookingDialog={bookingUIProps.setShowAttendanceGroupBookingDialog}
+                activityId={props.activityId}
+                ids={bookingUIProps.ids}
+            />
             {(bookingUIProps.ids.length > 0 && (
                 <>
-                    <BookingTableGroupButttons />
+                    <BookingTableGroupButttons
+                        filteredStatus={props.status}
+                    />
                 </>
             ))}
             {entities === null ? <Spinner /> : <BootstrapTable

@@ -17,10 +17,10 @@ export const fetchBookings = queryParams => dispatch => {
         });
 };
 
-export const updateBooking = (id, status) => dispatch => {
+export const updateBooking = (id, status, note) => dispatch => {
     dispatch(actions.startCall({ callType: callTypes.action }));
     return requestFromServer
-        .updateBooking(id, status)
+        .updateBooking(id, status,note)
         .then(() => {
             dispatch(actions.bookingUpdated({}));
         })

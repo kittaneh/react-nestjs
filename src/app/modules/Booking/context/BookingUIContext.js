@@ -12,13 +12,17 @@ export function BookingUIProvider({ children }) {
 
   const [ids, setIds] = useState([]);
   const [showUpdateGroupBookingDialog, setShowUpdateGroupBookingDialog] = useState(false);
+  const [showAttendanceGroupBookingDialog, setShowAttendanceGroupBookingDialog] = useState(false);
+  
 
 
   const value = {
     ids,
     setIds,
     showUpdateGroupBookingDialog,
-    setShowUpdateGroupBookingDialog
+    setShowUpdateGroupBookingDialog,
+    showAttendanceGroupBookingDialog,
+    setShowAttendanceGroupBookingDialog
   };
 
   return (

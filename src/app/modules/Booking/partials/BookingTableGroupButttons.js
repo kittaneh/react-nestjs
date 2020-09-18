@@ -9,8 +9,10 @@ export const BookingTableGroupButttons = (props) => {
   const bookingUIProps = useMemo(() => {
     return {
       ids: bookingUIContext.ids,
-      showUpdateGroupBookingDialog:bookingUIContext.showUpdateGroupBookingDialog,
-      setShowUpdateGroupBookingDialog:bookingUIContext.setShowUpdateGroupBookingDialog
+      showUpdateGroupBookingDialog: bookingUIContext.showUpdateGroupBookingDialog,
+      setShowUpdateGroupBookingDialog: bookingUIContext.setShowUpdateGroupBookingDialog,
+      showAttendanceGroupBookingDialog: bookingUIContext.showAttendanceGroupBookingDialog,
+      setShowAttendanceGroupBookingDialog: bookingUIContext.setShowAttendanceGroupBookingDialog
     };
   }, [bookingUIContext]);
 
@@ -28,29 +30,29 @@ export const BookingTableGroupButttons = (props) => {
               </label>
             </div>
             <div>
-              <button
-                type="button"
-                className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={null/*productsUIProps.openDeleteProductsDialog*/}
-              >
-                <i className="fa fa-trash"></i> Cancel All
-              </button>
-              &nbsp;
-              {/* <button
+              {props.filteredStatus === 'BOOKED' && <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={productsUIProps.openFetchProductsDialog}
+                onClick={() => bookingUIProps.setShowAttendanceGroupBookingDialog(true)}
               >
-                <i className="fa fa-stream"></i> Fetch Selected
-              </button> */}
+                <i className="fa fa-clock"></i> Attendance
+              </button>}
               &nbsp;
-              <button
+              {props.filteredStatus === 'PENDING' && <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
                 onClick={() => bookingUIProps.setShowUpdateGroupBookingDialog(true)}
               >
-                <i className="fa fa-sync-alt"></i> Update Status
-              </button>
+                <i className="fa fa-check-circle"></i> Update Status
+              </button>}
+              {/* {props.filteredStatus === 'BOOKED' && <button
+                type="button"
+                className="btn btn-danger font-weight-bolder font-size-sm"
+                onClick={null}
+              >
+                <i className="fa fa-trash"></i> Cancel All
+              </button>} */}
+              &nbsp;
             </div>
           </div>
         </div>
