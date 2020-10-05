@@ -2,9 +2,13 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, { useState, useMemo } from "react";
 import { Nav, Tab, Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import PerfectScrollbar from "react-perfect-scrollbar";
 import SVG from "react-inlinesvg";
 import objectPath from "object-path";
+import Moment from 'moment';
+import { connect } from 'getstream';
+
 import { useHtmlClassService } from "../../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
@@ -15,8 +19,35 @@ const perfectScrollbarOptions = {
 };
 
 export function UserNotificationsDropdown() {
+
   const [key, setKey] = useState("Alerts");
   const bgImage = toAbsoluteUrl("/media/misc/bg-1.jpg");
+  const [acts, setActs] = useState([]);
+  const [unSeen, setUnseen] = useState(false);
+
+  const client = connect('p4cngkg4cj9t', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSJ9.FgtDeycqHhsMRx-9uQ9mQeDB50LkUVOEeY8Z81GJLb4', '93560');
+
+  const notificationFeed = client.feed('activitiesFeed', '1');
+
+  const callback = data => {
+    setActs(data.new);
+    setUnseen(true);
+  };
+
+  const successCallback = () => {
+    console.log('now listening to changes in realtime');
+  };
+
+  const failCallback = data => {
+    alert('something went wrong, check the console logs');
+    console.log(data);
+  };
+
+  const handleDropdown = () => {
+    setUnseen(false);
+  }
+
+  notificationFeed.subscribe(callback).then(successCallback, failCallback);
 
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
@@ -43,7 +74,7 @@ export function UserNotificationsDropdown() {
         </div>
       )}
       {!layoutProps.offcanvas && (
-        <Dropdown drop="down" alignRight>
+        <Dropdown drop="down" onToggle={() => setUnseen(false)} alignRight>
           <Dropdown.Toggle
             as={DropdownTopbarItemToggler}
             id="kt_quick_notifications_toggle"
@@ -65,8 +96,8 @@ export function UserNotificationsDropdown() {
                     src={toAbsoluteUrl("/media/svg/icons/Code/Compiling.svg")}
                   />
                 </span>
-                <span className="pulse-ring"></span>
-                <span className="pulse-ring" />
+                {unSeen && <span className="pulse-ring"></span>}
+                {unSeen && <span className="pulse-ring" />}
               </div>
             </OverlayTrigger>
           </Dropdown.Toggle>
@@ -81,7 +112,7 @@ export function UserNotificationsDropdown() {
                 <h4 className="d-flex flex-center rounded-top">
                   <span className="text-white">User Notifications</span>
                   <span className="btn btn-text btn-success btn-sm font-weight-bold btn-font-md ml-2">
-                    23 new
+                    {acts.length} new
                   </span>
                 </h4>
 
@@ -94,8 +125,7 @@ export function UserNotificationsDropdown() {
                     <Nav.Item className="nav-item" as="li">
                       <Nav.Link
                         eventKey="Alerts"
-                        className={`nav-link show ${
-                          key === "Alerts" ? "active" : ""
+                        className={`nav-link show ${key === "Alerts" ? "active" : ""
                           }`}
                       >
                         Alerts
@@ -104,8 +134,7 @@ export function UserNotificationsDropdown() {
                     <Nav.Item as="li">
                       <Nav.Link
                         eventKey="Events"
-                        className={`nav-link show ${
-                          key === "Events" ? "active" : ""
+                        className={`nav-link show ${key === "Events" ? "active" : ""
                           }`}
                       >
                         Events
@@ -114,8 +143,7 @@ export function UserNotificationsDropdown() {
                     <Nav.Item as="li">
                       <Nav.Link
                         eventKey="Logs"
-                        className={`nav-link show ${
-                          key === "Logs" ? "active" : ""
+                        className={`nav-link show ${key === "Logs" ? "active" : ""
                           }`}
                       >
                         Logs
@@ -125,7 +153,7 @@ export function UserNotificationsDropdown() {
 
                   <Tab.Content className="tab-content">
                     <Tab.Pane eventKey="Alerts" className="p-8">
-                      <PerfectScrollbar
+                      {acts.length > 0 ? (<PerfectScrollbar
                         options={perfectScrollbarOptions}
                         className="scroll pr-7 mr-n7"
                         style={{ maxHeight: "300px", position: "relative" }}
@@ -142,18 +170,19 @@ export function UserNotificationsDropdown() {
                             </span>
                           </div>
                           <div className="d-flex flex-column font-weight-bold">
-                            <a
-                              href="#"
+                            <Link
+                              to={`/activities/activity/${acts[0].foreign_id}`}
                               className="text-dark text-hover-primary mb-1 font-size-lg"
+                              onClick={() => setInterval(setActs([]),10000)}
                             >
-                              New order has been received
-                            </a>
+                              New Booking has been received for {acts.length > 0 && acts[0].object}
+                            </Link>
                             <span className="text-muted">
-                              2 hrs ago
+                              {acts.length && Moment(acts[0].time).fromNow()}
                             </span>
                           </div>
                         </div>
-                        <div className="d-flex align-items-center mb-6">
+                        {/* <div className="d-flex align-items-center mb-6">
                           <div className="symbol symbol-40 symbol-light-warning mr-5">
                             <span className="symbol-label">
                               <SVG
@@ -244,8 +273,12 @@ export function UserNotificationsDropdown() {
                               5 hrs ago
                             </span>
                           </div>
-                        </div>
-                      </PerfectScrollbar>
+                        </div> */}
+                      </PerfectScrollbar>) : (<div className="d-flex flex-center text-center text-muted min-h-200px">
+                        All caught up!
+                        <br />
+                        No new notifications.
+                      </div>)}
                     </Tab.Pane>
                     <Tab.Pane
                       eventKey="Events"

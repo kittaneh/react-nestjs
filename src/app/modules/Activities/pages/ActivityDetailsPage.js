@@ -6,11 +6,12 @@ import { Card, CardHeader, CardBody } from "../../../../_metronic/_partials/cont
 import StaticSubHeader from '../../../../_metronic/layout/components/subheader/StaticSubHeader';
 import { BookingTable } from '../../Booking/partials/BookingTable';
 import { BookingUIProvider } from "../..//Booking/context/BookingUIContext";
+import { ActivityView } from '../partials/ActivityView';
 
 
 export const ActivityDetailsPage = (props) => {
 
-    const [tab, setTab] = useState("requested");
+    const [tab, setTab] = useState("basic");
     const cancelClickHandler = () => { props.history.replace('/activities'); }
 
 
@@ -66,7 +67,9 @@ export const ActivityDetailsPage = (props) => {
                 </CardHeader>
                 <CardBody>
                     {tab === "basic" && (
-                        <div>Hello basic</div>
+                        <ActivityView
+                            activityId={props.match.params.id}
+                        />
                     )}
                     {tab === "requested" && (
                         <BookingUIProvider>

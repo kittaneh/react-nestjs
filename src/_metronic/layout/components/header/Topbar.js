@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import objectPath from "object-path";
 import SVG from "react-inlinesvg";
+
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
@@ -12,6 +13,7 @@ import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDr
 import { QuickUserToggler } from "../extras/QuiclUserToggler";
 
 export function Topbar() {
+
   const uiService = useHtmlClassService();
 
   const layoutProps = useMemo(() => {
@@ -41,8 +43,23 @@ export function Topbar() {
     };
   }, [uiService]);
 
+  // const activity = {
+  //   actor: {
+  //     data: {
+  //       name: 'Nora Ferguson',
+  //       profileImage: 'https://randomuser.me/api/portraits/women/72.jpg',
+  //     },
+  //   },
+  //   verb: 'post',
+  //   object: 'I just missed my train 😤',
+  //   time: new Date()
+  // };
+
   return (
     <div className="topbar">
+
+      {/* <Notification/> */}
+
       {layoutProps.viewSearchDisplay && <SearchDropdown />}
 
       {layoutProps.viewNotificationsDisplay && <UserNotificationsDropdown />}

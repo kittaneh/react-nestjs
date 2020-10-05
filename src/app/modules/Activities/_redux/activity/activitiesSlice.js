@@ -6,7 +6,9 @@ const initialActivitiesState = {
     totalCount: 0,
     entities: null,
     error: null,
-    activityCreated:null
+    activityCreated: null,
+    activity: null,
+    published:true
 };
 export const callTypes = {
     list: "list",
@@ -49,6 +51,19 @@ export const activitiesSlice = createSlice({
             state.error = null;
             state.activityCreated = true;
             //state.entities.push(action.payload.customer);
+        },
+        // getActivity
+        activityFetched: (state, action) => {
+            state.actionsLoading = false;
+            state.activity = action.payload.activity;
+            state.published = state.activity[0].is_published;
+            state.error = null;
+        },
+        //updateActivity
+        activityUpdated: (state, action) => {
+            state.actionsLoading = false;
+            state.published = action.payload.published;
+            state.error = null;
         },
     }
 });
