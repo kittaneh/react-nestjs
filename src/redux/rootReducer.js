@@ -10,6 +10,7 @@ import { activitiesSlice } from "../app/modules/Activities/_redux/activity/activ
 import { typesSlice } from "../app/modules/Activities/_redux/type/typesSlice";
 import { bookingSlice } from '../app/modules/Booking/_redux/bookingSlice';
 import { calendarSlice } from '../app/modules/Calendar/_redux/calendarSlice';
+import { skillsSlice } from '../app/modules/Skills/_redux/skillsSlice';
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -20,7 +21,8 @@ export const rootReducer = combineReducers({
   activities:activitiesSlice.reducer,
   types:typesSlice.reducer,
   booking:bookingSlice.reducer,
-  calendar:calendarSlice.reducer
+  calendar:calendarSlice.reducer,
+  skills:skillsSlice.reducer
 });
 
 export function* rootSaga() {

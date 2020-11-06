@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardBody } from "../../../../_metronic/_partials/controls";
 import StaticSubHeader from '../../../../_metronic/layout/components/subheader/StaticSubHeader';
 import { BookingTable } from '../../Booking/partials/BookingTable';
-import { BookingUIProvider } from "../..//Booking/context/BookingUIContext";
+import { BookingUIProvider } from "../../Booking/context/BookingUIContext";
+import { SkillsUIProvider } from "../../Skills/context/SkillsUIContext";
 import { ActivityView } from '../partials/ActivityView';
+import { SkillsList } from '../../Skills/partials/SkillsList';
 
 
 export const ActivityDetailsPage = (props) => {
@@ -53,12 +55,25 @@ export const ActivityDetailsPage = (props) => {
                                         className={`nav-link ${tab === "booked" && "active"}`}
                                         data-toggle="tab"
                                         role="tab"
-                                        aria-selected={(tab === "specs").toString()}
+                                        aria-selected={(tab === "booked").toString()}
                                     >
                                         {/* <span className="svg-icon svg-icon-md svg-icon-500 mr-1">
                                             <SVG src={toAbsoluteUrl("/media/svg/icons/others/requested.svg")} />
                                             </span> */}
                                         <span className="font-weight-bold">Booked</span>
+                                    </a>
+                                </li>
+                                <li className="nav-item" onClick={() => setTab("skills")}>
+                                    <a
+                                        className={`nav-link ${tab === "skills" && "active"}`}
+                                        data-toggle="tab"
+                                        role="tab"
+                                        aria-selected={(tab === "skills").toString()}
+                                    >
+                                        {/* <span className="svg-icon svg-icon-md svg-icon-500 mr-1">
+                                            <SVG src={toAbsoluteUrl("/media/svg/icons/others/requested.svg")} />
+                                            </span> */}
+                                        <span className="font-weight-bold">Skills</span>
                                     </a>
                                 </li>
                             </>
@@ -86,6 +101,13 @@ export const ActivityDetailsPage = (props) => {
                                 status={'BOOKED'}
                             />
                         </BookingUIProvider>
+                    )}
+                    {tab === "skills" && (
+                        <SkillsUIProvider>
+                            <SkillsList 
+                                  activityId={props.match.params.id}
+                            />
+                        </SkillsUIProvider>
                     )}
                 </CardBody>
             </Card>

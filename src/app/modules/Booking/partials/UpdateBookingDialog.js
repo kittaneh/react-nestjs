@@ -13,9 +13,6 @@ export const UpdateBookingDialog = (props) => {
         shallowEqual
     );
 
-    // looking for loading/dispatch
-    //useEffect(() => { }, [dispatch]);
-
     const updateBooking = (id, activityId) => {
         // server request for deleting remark by id
         dispatch(actions.updateBooking(id, 'BOOKED')).then(() => {
