@@ -9,6 +9,20 @@ export const fetchUnMappedSkills = queryParams => dispatch => {
         .findUnMappedSkills(queryParams)
         .then(response => {
             const { data } = response;
+            dispatch(actions.unmappedSkillsFetched({ totalCount: data.length, entities: data }));
+        })
+        .catch(error => {
+            error.clientMessage = "Can't find skills";
+            dispatch(actions.catchError({ error, callType: callTypes.list }));
+        });
+};
+
+export const fetchSkills = queryParams => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.list }));
+    return requestFromServer
+        .findSkills(queryParams)
+        .then(response => {
+            const { data } = response;
             dispatch(actions.skillsFetched({ totalCount: data.length, entities: data }));
         })
         .catch(error => {

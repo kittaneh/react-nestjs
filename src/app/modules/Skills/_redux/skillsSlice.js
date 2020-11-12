@@ -5,6 +5,8 @@ const initialSkillsState = {
     actionsLoading: false,
     totalCount: 0,
     entities: null,
+    unMappedSkills: null,
+    unMappedSkillsCount:null,
 };
 export const callTypes = {
     list: "list",
@@ -38,6 +40,13 @@ export const skillsSlice = createSlice({
             state.error = null;
             state.entities = entities;
             state.totalCount = totalCount;
+        },
+        unmappedSkillsFetched: (state, action) => {
+            const { totalCount, entities } = action.payload;
+            state.listLoading = false;
+            state.error = null;
+            state.unMappedSkills = entities;
+            state.unMappedSkillsCount = totalCount;
         },
         skillsAdded: (state, action) => {
             state.actionsLoading = false;

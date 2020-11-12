@@ -24,7 +24,7 @@ export const AddSkillsDialog = (props) => {
         (state) => ({ currentState: state.skills }),
         shallowEqual
     );
-    const { entities, actionsLoading } = currentState;
+    const { unMappedSkills, actionsLoading } = currentState;
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -80,11 +80,11 @@ export const AddSkillsDialog = (props) => {
                         bordered={false}
                         remote
                         keyField="id"
-                        data={entities}
+                        data={unMappedSkills}
                         columns={columns}
                         noDataIndication={() => <div className="text-center">No data</div>}
                         selectRow={getSelectRow({
-                            entities,
+                            entities:unMappedSkills,
                             ids: skillsUIProps.ids,
                             setIds: skillsUIProps.setIds,
                         })}
