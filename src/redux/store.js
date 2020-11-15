@@ -2,6 +2,7 @@ import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import {reduxBatch} from "@manaflair/redux-batch";
 import {persistStore} from "redux-persist";
+
 import {rootReducer, rootSaga} from "./rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
