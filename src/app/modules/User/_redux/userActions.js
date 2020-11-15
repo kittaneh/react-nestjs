@@ -17,4 +17,20 @@ export const fetchUsers = queryParams => dispatch => {
         });
 };
 
+export const createUser = (user) => dispatch => {
+    dispatch(actions.startCall({ callType: callTypes.action }));
+    return requestFromServer
+        .createUser(user)
+        .then(response => {
+            const user = response.data;
+            console.log(user);
+            dispatch(actions.userCreated(user));
+        })
+        .catch(error => {
+            console.log(error);
+            error.clientMessage = "Can't create user";
+            dispatch(actions.catchError({ error, callType: callTypes.action }));
+        });
+};
+
 

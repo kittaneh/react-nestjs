@@ -1,8 +1,19 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, makeStyles } from '@material-ui/core';
 
+const useStyles = makeStyles(theme => ({
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
+    },
+}));
 
 const staticSubHeader = (props) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const classes = useStyles();
+
     return (
         <div
             id="kt_subheader"
@@ -37,25 +48,30 @@ const staticSubHeader = (props) => {
                 {/* <ButtonToolbar> */}
                 <div className="d-flex btn-toolbar">
                     {props.newBtn && <Button
-                        variant="outline-primary"
+                        className={classes.button}
+                        variant="contained"
+                        color="secondary"
                         onClick={props.newBtnClickHandler}
                     >
                         {props.newBtn}
                     </Button>}
                     {props.saveBtn && (<Button
-                        className="mr-2"
-                        variant="outline-primary"
+                        className={classes.button}
+                        variant="contained"
+                        color="secondary"
                         type="submit"
                         disabled={props.loading}
                         onClick={!props.loading ? (e) => {
-                            e.preventDefault();
+                            // console.log('clicked');
+                            // e.preventDefault();
                             props.saveBtnClickHandler();
-                        }:null}
+                        } : null}
                     >
                         {props.loading ? 'Saving…' : props.saveBtn}
                     </Button>)}
                     {props.cancelBtn && <Button
-                        variant="outline-secondary"
+                        className={classes.button}
+                        variant="contained"
                         onClick={props.cancelBtnClickHandler}
                     >
                         {props.cancelBtn}

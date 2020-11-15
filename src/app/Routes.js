@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Switch, Route } from "react-router-dom";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 
@@ -7,7 +7,11 @@ import BasePage from "./BasePage";
 export function Routes() {
     return (
         <Layout>
-            <BasePage />
+            <Switch>
+                <Route>
+                    <BasePage />
+                </Route>
+            </Switch>
         </Layout>
     );
 }

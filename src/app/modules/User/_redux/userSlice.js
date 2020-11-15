@@ -5,6 +5,7 @@ const initialUserState = {
     actionsLoading: false,
     totalCount: 0,
     entities: null,
+    userCreated: null,
 };
 export const callTypes = {
     list: "list",
@@ -38,6 +39,11 @@ export const userSlice = createSlice({
             state.error = null;
             state.entities = entities;
             state.totalCount = totalCount;
+        },
+        userCreated: (state, action) => {
+            state.actionsLoading = false;
+            state.error = null;
+            state.userCreated = true;
         },
     }
 });

@@ -1,12 +1,29 @@
-/* eslint-disable no-restricted-imports */
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import { Table } from '@material-ui/core';
+import { TableBody } from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
+import { TableHead } from '@material-ui/core';
+import { TableRow } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core';
+
+const StyledTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
+}))(TableRow);
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,12 +31,14 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(3),
         overflowX: 'auto',
     },
-    table: {},
+    table: {
+        minWidth: 700,
+    },
 }));
 
 
 export const UsersTable = (props) => {
-
+    
     const classes = useStyles();
 
     return (
@@ -28,20 +47,20 @@ export const UsersTable = (props) => {
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>First Name</TableCell>
-                            <TableCell >Last Name</TableCell>
-                            <TableCell >Email</TableCell>
+                            <StyledTableCell>First Name</StyledTableCell>
+                            <StyledTableCell >Last Name</StyledTableCell>
+                            <StyledTableCell >Email</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {props.entities.map((user, index) => (
-                            <TableRow key={index}>
-                                <TableCell component="th" scope="row">
+                            <StyledTableRow key={index}>
+                                <StyledTableCell component="th" scope="row">
                                     {user.firstname}
-                                </TableCell>
-                                <TableCell >{user.lastname}</TableCell>
-                                <TableCell >{user.email}</TableCell>
-                            </TableRow>
+                                </StyledTableCell>
+                                <StyledTableCell >{user.lastname}</StyledTableCell>
+                                <StyledTableCell >{user.email}</StyledTableCell>
+                            </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>
