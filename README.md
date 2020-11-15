@@ -3,7 +3,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## prerequisite
 
 To run you have first to run make sure you cloned [https://github.com/kittaneh/nestjs-gql-mongodb/](https://github.com/kittaneh/nestjs-gql-mongodb/)
-and then run ### `npm run start`
+and then run 
+
+### `npm run start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
