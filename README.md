@@ -2,8 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Prerequisite
 
-To run you have first to run make sure you cloned [backend](https://github.com/kittaneh/nestjs-gql-mongodb/)
-and then run the backend
+To run you have first to  make sure you cloned the [backend](https://github.com/kittaneh/nestjs-gql-mongodb/)
+and then run it using the below command
 
 ### `npm run start`
 
